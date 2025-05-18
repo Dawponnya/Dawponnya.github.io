@@ -105,6 +105,335 @@
             </div>
         </section>
     </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Posting Section</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        
+        /* Article Section Container */
+        .article-section {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .article-section:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Header */
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        /* Form Styles */
+        .article-form {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        /* Character Counter */
+        .char-counter {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .char-counter.warning {
+            color: #ff9800;
+        }
+        
+        .char-counter.error {
+            color: #f44336;
+        }
+        
+        /* Tags Input */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tag-remove {
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Preview Section */
+        .preview-section {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .preview-section h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+        
+        .preview-content {
+            background: var(--light-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .article-section {
+                margin: 0 10px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="article-section">
+        <div class="section-header">
+            <h2>Share Your Article</h2>
+        </div>
+        
+        <form class="article-form" id="articleForm">
+            <div class="form-group">
+                <label for="articleTitle">Article Title</label>
+                <input type="text" id="articleTitle" class="form-control" placeholder="Enter your article title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="articleContent">Article Content</label>
+                <textarea id="articleContent" class="form-control" placeholder="Write your article here..." required></textarea>
+                <div class="char-counter"><span id="charCount">0</span>/2000 characters</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="articleTags">Tags (Separate with commas)</label>
+                <input type="text" id="articleTags" class="form-control" placeholder="e.g., technology, design, business">
+                <div class="tags-container" id="tagsContainer"></div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Publish Article</button>
+        </form>
+        
+        <div class="preview-section" id="previewSection">
+            <h3>Article Preview</h3>
+            <div class="preview-content">
+                <h4 id="previewTitle"></h4>
+                <p id="previewContent"></p>
+                <div class="tags-container" id="previewTags"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const articleForm = document.getElementById('articleForm');
+            const articleContent = document.getElementById('articleContent');
+            const charCount = document.getElementById('charCount');
+            const articleTags = document.getElementById('articleTags');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const previewSection = document.getElementById('previewSection');
+            const previewTitle = document.getElementById('previewTitle');
+            const previewContent = document.getElementById('previewContent');
+            const previewTags = document.getElementById('previewTags');
+            
+            // Character counter for article content
+            articleContent.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+                
+                // Update counter color based on length
+                if (count > 1800) {
+                    charCount.classList.add('error');
+                    charCount.classList.remove('warning');
+                } else if (count > 1500) {
+                    charCount.classList.add('warning');
+                    charCount.classList.remove('error');
+                } else {
+                    charCount.classList.remove('warning', 'error');
+                }
+            });
+            
+            // Tags input functionality
+            articleTags.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    addTag(this.value.trim().replace(',', ''));
+                    this.value = '';
+                }
+            });
+            
+            function addTag(tagText) {
+                if (tagText === '') return;
+                
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `
+                    ${tagText}
+                    <span class="tag-remove">&times;</span>
+                `;
+                
+                tag.querySelector('.tag-remove').addEventListener('click', function() {
+                    tag.remove();
+                });
+                
+                tagsContainer.appendChild(tag);
+            }
+            
+            // Form submission
+            articleForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const title = document.getElementById('articleTitle').value;
+                const content = document.getElementById('articleContent').value;
+                
+                // Update preview
+                previewTitle.textContent = title;
+                previewContent.textContent = content;
+                
+                // Update tags preview
+                previewTags.innerHTML = '';
+                const tags = tagsContainer.querySelectorAll('.tag');
+                tags.forEach(tag => {
+                    const tagClone = tag.cloneNode(true);
+                    tagClone.querySelector('.tag-remove').remove();
+                    previewTags.appendChild(tagClone);
+                });
+                
+                // Show preview
+                previewSection.style.display = 'block';
+                
+                // Scroll to preview
+                previewSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // In a real app, you would send data to server here
+                console.log('Article submitted:', { title, content, tags });
+                
+                // Show success message (in a real app)
+                alert('Article submitted successfully! (This is a demo)');
+            });
+            
+            // Initialize with some example tags
+            addTag('technology');
+            addTag('design');
+        });
+    </script>
+</body>
+</html>
 
     <footer>
         <h3>ဆက်သွယ်ရန်</h3>
