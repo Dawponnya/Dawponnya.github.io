@@ -105,7 +105,7 @@
             </div>
         </section>
     </div>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="my">
 <head>
     <meta charset="UTF-8">
@@ -114,14 +114,13 @@
     <style>
         /* အခြေခံဒီဇိုင်း */
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4895ef;
+            --primary-color: #2a9d8f;
+            --secondary-color: #264653;
+            --accent-color: #e9c46a;
             --light-color: #f8f9fa;
             --dark-color: #212529;
-            --success-color: #4cc9f0;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
         
@@ -129,214 +128,303 @@
             font-family: 'Padauk', 'Myanmar Text', sans-serif;
             line-height: 1.6;
             color: var(--dark-color);
-            background-color: #f5f7fa;
+            background-color: #f0f2f5;
             padding: 20px;
         }
         
         /* ဆောင်းပါးတင်ရန် နေရာ */
-        .article-section {
+        .article-container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             overflow: hidden;
-            transition: var(--transition);
-        }
-        
-        .article-section:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
+            border: 1px solid #e0e0e0;
         }
         
         /* ခေါင်းစဉ် */
-        .section-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        .article-header {
+            background-color: var(--secondary-color);
             color: white;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
         
-        .section-header h2 {
+        .article-header h2 {
             margin: 0;
             font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .header-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            opacity: 0.7;
         }
         
         /* ဖောင်ဒီဇိုင်း */
         .article-form {
-            padding: 25px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
-        .form-group label {
+        .form-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
             color: var(--secondary-color);
+            font-size: 1.05rem;
         }
         
-        .form-control {
+        .form-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
             font-size: 1rem;
             transition: var(--transition);
             font-family: 'Padauk', 'Myanmar Text', sans-serif;
+            background-color: rgba(255, 255, 255, 0.8);
         }
         
-        .form-control:focus {
-            border-color: var(--accent-color);
+        .form-input:focus {
+            border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+            background-color: white;
         }
         
-        textarea.form-control {
-            min-height: 200px;
+        .form-textarea {
+            min-height: 250px;
             resize: vertical;
+            line-height: 1.7;
         }
         
         /* စာလုံးရေတွက်စနစ် */
-        .char-counter {
-            text-align: right;
-            font-size: 0.8rem;
+        .char-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.85rem;
             color: #666;
-            margin-top: 5px;
         }
         
-        .char-counter.warning {
-            color: #ff9800;
+        .char-count.warning {
+            color: #f4a261;
         }
         
-        .char-counter.error {
-            color: #f44336;
+        .char-count.error {
+            color: #e76f51;
         }
         
         /* တက်ဂ်များထည့်ရန် */
-        .tags-container {
+        .tags-wrapper {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 10px;
         }
         
-        .tag {
+        .tag-item {
             background-color: var(--accent-color);
-            color: white;
-            padding: 5px 10px;
+            color: #333;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .tag-remove {
-            margin-left: 5px;
+            margin-left: 6px;
             cursor: pointer;
             font-weight: bold;
+            color: #333;
         }
         
         /* တင်ရန် ခလုတ် */
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 12px 25px;
+        .submit-area {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .form-btn {
+            padding: 12px 30px;
             border-radius: var(--border-radius);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            display: block;
-            width: 100%;
+            font-family: 'Padauk', 'Myanmar Text', sans-serif;
+        }
+        
+        .preview-btn {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .preview-btn:hover {
+            background-color: #f0f9f8;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
         }
         
         .submit-btn:hover {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            background-color: #238f82;
+            border-color: #238f82;
             transform: translateY(-2px);
         }
         
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
         /* အစမ်းကြည့်ရန် နေရာ */
-        .preview-section {
+        .preview-container {
             display: none;
-            padding: 20px;
+            padding: 30px;
+            background-color: white;
             border-top: 1px solid #eee;
             animation: fadeIn 0.5s ease;
         }
         
-        .preview-section h3 {
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .preview-title {
             color: var(--secondary-color);
-            margin-top: 0;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .close-preview {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
         }
         
         .preview-content {
-            background: var(--light-color);
-            padding: 15px;
+            padding: 20px;
+            background-color: var(--light-color);
             border-radius: var(--border-radius);
+            line-height: 1.8;
+        }
+        
+        .preview-tags {
+            margin-top: 20px;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* ဖုန်းအတွက် ဒီဇိုင်း */
         @media (max-width: 768px) {
-            .article-section {
+            .article-container {
                 margin: 0 10px;
             }
             
-            .section-header h2 {
+            .article-header h2 {
                 font-size: 1.5rem;
+            }
+            
+            .article-form {
+                padding: 20px;
+            }
+            
+            .submit-area {
+                flex-direction: column;
+            }
+            
+            .form-btn {
+                width: 100%;
             }
         }
     </style>
     <!-- Myanmar Font -->
     <link href="https://fonts.googleapis.com/css2?family=Padauk&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <section class="article-section">
-        <div class="section-header">
-            <h2>ဆောင်းပါးတင်ရန်</h2>
+    <div class="article-container">
+        <div class="article-header">
+            <h2>ဆောင်းပါးအသစ်တင်ရန်</h2>
+            <div class="header-icon">
+                <i class="fas fa-pen-fancy"></i>
+            </div>
         </div>
         
         <form class="article-form" id="articleForm">
             <div class="form-group">
-                <label for="articleTitle">ဆောင်းပါးခေါင်းစဉ်</label>
-                <input type="text" id="articleTitle" class="form-control" placeholder="ဆောင်းပါးခေါင်းစဉ်ထည့်ပါ" required>
+                <label for="articleTitle" class="form-label">ဆောင်းပါးခေါင်းစဉ်</label>
+                <input type="text" id="articleTitle" class="form-input" placeholder="သင့်ဆောင်းပါး၏ ခေါင်းစဉ်ကိုရေးပါ..." required>
             </div>
             
             <div class="form-group">
-                <label for="articleContent">ဆောင်းပါးအကြောင်းအရာ</label>
-                <textarea id="articleContent" class="form-control" placeholder="ဆောင်းပါးရေးသားရန်..." required></textarea>
-                <div class="char-counter"><span id="charCount">0</span>/2000 စာလုံး</div>
+                <label for="articleContent" class="form-label">ဆောင်းပါးအကြောင်းအရာ</label>
+                <textarea id="articleContent" class="form-input form-textarea" placeholder="သင့်ဆောင်းပါးကိုဤနေရာတွင်ရေးသားပါ..." required></textarea>
+                <div class="char-info">
+                    <span>အများဆုံး 2000 စာလုံး</span>
+                    <span class="char-count" id="charCount">0</span>
+                </div>
             </div>
             
             <div class="form-group">
-                <label for="articleTags">တက်ဂ်များ (ကော်မာဖြင့်ခွဲပါ)</label>
-                <input type="text" id="articleTags" class="form-control" placeholder="ဥပမာ - နည်းပညာ၊ ဒီဇိုင်း၊ စီးပွားရေး">
-                <div class="tags-container" id="tagsContainer"></div>
+                <label for="articleTags" class="form-label">တက်ဂ်များ</label>
+                <input type="text" id="articleTags" class="form-input" placeholder="တက်ဂ်ထည့်ရန် ရိုက်ထည့်ပြီး Enter နှိပ်ပါ">
+                <div class="tags-wrapper" id="tagsContainer"></div>
             </div>
             
-            <button type="submit" class="submit-btn">ဆောင်းပါးတင်ပါ</button>
+            <div class="submit-area">
+                <button type="button" class="form-btn preview-btn" id="previewBtn">
+                    <i class="fas fa-eye"></i> အစမ်းကြည့်ရန်
+                </button>
+                <button type="submit" class="form-btn submit-btn">
+                    <i class="fas fa-paper-plane"></i> တင်ပါ
+                </button>
+            </div>
         </form>
         
-        <div class="preview-section" id="previewSection">
-            <h3>ဆောင်းပါးအစမ်းမြင်ကွင်း</h3>
+        <div class="preview-container" id="previewContainer">
+            <div class="preview-header">
+                <h3 class="preview-title">ဆောင်းပါးအစမ်းမြင်ကွင်း</h3>
+                <button class="close-preview" id="closePreview">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             <div class="preview-content">
-                <h4 id="previewTitle"></h4>
-                <p id="previewContent"></p>
-                <div class="tags-container" id="previewTags"></div>
+                <h4 id="previewTitle" style="margin-top: 0; color: var(--secondary-color);"></h4>
+                <div id="previewContent" style="white-space: pre-line;"></div>
+                <div class="preview-tags">
+                    <div class="tags-wrapper" id="previewTags"></div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -346,7 +434,9 @@
             const charCount = document.getElementById('charCount');
             const articleTags = document.getElementById('articleTags');
             const tagsContainer = document.getElementById('tagsContainer');
-            const previewSection = document.getElementById('previewSection');
+            const previewBtn = document.getElementById('previewBtn');
+            const previewContainer = document.getElementById('previewContainer');
+            const closePreview = document.getElementById('closePreview');
             const previewTitle = document.getElementById('previewTitle');
             const previewContent = document.getElementById('previewContent');
             const previewTags = document.getElementById('previewTags');
@@ -381,7 +471,7 @@
                 if (tagText === '') return;
                 
                 const tag = document.createElement('div');
-                tag.className = 'tag';
+                tag.className = 'tag-item';
                 tag.innerHTML = `
                     ${tagText}
                     <span class="tag-remove">&times;</span>
@@ -394,21 +484,19 @@
                 tagsContainer.appendChild(tag);
             }
             
-            // ဖောင်တင်သွင်းခြင်း
-            articleForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
+            // အစမ်းကြည့်ရန် ခလုတ်
+            previewBtn.addEventListener('click', function() {
                 // ဖောင်တန်ဖိုးများရယူခြင်း
                 const title = document.getElementById('articleTitle').value;
                 const content = document.getElementById('articleContent').value;
                 
                 // အစမ်းကြည့်ရန် အချက်အလက်များထည့်ခြင်း
-                previewTitle.textContent = title;
-                previewContent.textContent = content;
+                previewTitle.textContent = title || "(ခေါင်းစဉ်မရှိပါ)";
+                previewContent.textContent = content || "(အကြောင်းအရာမရှိပါ)";
                 
                 // တက်ဂ်များကို အစမ်းကြည့်ရန်ထည့်ခြင်း
                 previewTags.innerHTML = '';
-                const tags = tagsContainer.querySelectorAll('.tag');
+                const tags = tagsContainer.querySelectorAll('.tag-item');
                 tags.forEach(tag => {
                     const tagClone = tag.cloneNode(true);
                     tagClone.querySelector('.tag-remove').remove();
@@ -416,20 +504,45 @@
                 });
                 
                 // အစမ်းကြည့်ရန် ပြသခြင်း
-                previewSection.style.display = 'block';
+                previewContainer.style.display = 'block';
                 
                 // အစမ်းကြည့်ရန်နေရာသို့ ဆင်းခြင်း
-                previewSection.scrollIntoView({ behavior: 'smooth' });
+                previewContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // အစမ်းကြည့်ရန် ပိတ်ရန်
+            closePreview.addEventListener('click', function() {
+                previewContainer.style.display = 'none';
+            });
+            
+            // ဖောင်တင်သွင်းခြင်း
+            articleForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // ဖောင်တန်ဖိုးများရယူခြင်း
+                const title = document.getElementById('articleTitle').value;
+                const content = document.getElementById('articleContent').value;
+                const tags = Array.from(tagsContainer.querySelectorAll('.tag-item')).map(tag => tag.textContent.trim());
                 
                 // တကယ့်အချိန်တွင် server သို့ပို့ရန်
-                console.log('ဆောင်းပါးတင်ပြီး:', { title, content, tags });
+                console.log('ဆောင်းပါးတင်ပြီး:', { 
+                    title: title,
+                    content: content,
+                    tags: tags
+                });
                 
                 // အောင်မြင်ကြောင်း message ပြသခြင်း
-                alert('ဆောင်းပါးအောင်မြင်စွာတင်ပြီးပါပြီ! (ဒီမော်ဒယ်ဖြစ်ပါသည်)');
+                alert('ဆောင်းပါးအောင်မြင်စွာတင်ပြီးပါပြီ!');
+                
+                // ဖောင်ကို ရှင်းလင်းခြင်း
+                this.reset();
+                tagsContainer.innerHTML = '';
+                charCount.textContent = '0';
+                charCount.classList.remove('warning', 'error');
             });
             
             // နမူနာ တက်ဂ်များ
-            addTag('နည်းပညာ');
+            addTag('ဆောင်းပါး');
             addTag('ဒီဇိုင်း');
         });
     </script>
